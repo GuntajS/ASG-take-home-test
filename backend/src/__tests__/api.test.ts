@@ -129,7 +129,7 @@ describe("API Integration Tests", () => {
     });
 
     // TODO: Un-skip this test (it should pass once createCheck is implemented)
-    it.skip("should create check and return 201", async () => {
+    it("should create check and return 201", async () => {
       // Act & Assert
       const response = await request(app)
         .post("/checks")

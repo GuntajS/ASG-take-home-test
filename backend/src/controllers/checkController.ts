@@ -9,7 +9,8 @@
 import { Request, Response } from "express";
 import * as checkService from "../services/checkService";
 import { validateCheckRequest } from "../validation";
-import { ErrorResponse } from "../types";
+import {ErrorResponse, ValidationError} from "../types";
+import {CreateCheckData} from "../services/checkService";
 
 /**
  * POST /checks
@@ -67,7 +68,28 @@ import { ErrorResponse } from "../types";
  */
 export const createCheck = (req: Request, res: Response): void => {
   // TODO: Implement the createCheck controller
-  //
+  let validation_check:ValidationError[] = validateCheckRequest(req.body)
+
+  if (validation_check.length){
+    res.status(400).json({
+      error: {
+        code:"VALIDATION_ERROR",
+        message: "Invalid request",
+        details: validation_check}})
+    return;
+  }
+  let check_data:CreateCheckData = {
+    vehicleId: req.body.vehicleId,
+    odometerKm: req.body.odometerKm,
+    items: req.body.items,
+    note: req.body.note
+  }
+  let check_object = checkService.createCheck(check_data)
+
+  res.status(201).json(check_object)
+
+
+
   // Instructions:
   // 1. Validate the request body using validateCheckRequest(req.body)
   // 2. If there are validation errors, return a 400 status with ErrorResponse format
@@ -77,7 +99,6 @@ export const createCheck = (req: Request, res: Response): void => {
   // Hint: Look at the getChecks controller below for reference on error handling
   // Hint: The checkService.createCheck expects CreateCheckData interface
 
-  res.status(501).json({ error: { message: "Not implemented" } });
 };
 
 /**
