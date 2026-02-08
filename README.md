@@ -69,15 +69,27 @@ Please answer these briefly:
 
 1. **Authentication:** If we need to add authentication to this system, how would you approach it?
 
+   - A: For the current system a JSON Web Token authentication would suffice but if this was a production system I would implement OAuth 2.0 since that is the industry standard
+
 2. **Improvements:** What other improvements would you implement if this were going to production or if you have more time?
+
+    - A: I would firstly implement a database such as MongoDB or PostgreSQL, then I would implement Ci/CD pipelines, and logging system for errors. and maybe an AI agent if the app had more functions (my area of expertise).
 
 3. **Tech Stack Experience:** Do you have experience with PHP, Vue.js, or mobile app development (React Native/Flutter)?
 
+    - A: I do not specifically have experience PHP, Vue.js or mobile app development but I have a strong background in web technologies with Python, Flask Typescript, React TS and JS and Java and axios. 
+
 4. **AI / Tools:** What tools/assistants did you use while working on this assignment (e.g., GitHub Copilot, ChatGPT, etc.)? We appreciate AI usage, we're interested in _how_ you use these tools.
+
+   - A: I used Gemini Pro 3.0 to primarily to verify if my thought process and implementation was correct and used its recommendations to improve my work, but I made the final decision on what should be implemented and how.
 
 5. **Visa Status:** What visa are you currently on?
 
+   - A: I am an Australian Citizen
+
 6. **Languages:** We have users from different backgrounds and industries. What language(s) do you know and what's your proficiency level?
+
+   - A: I proficiently know English, Hindi and Punjabi. I am learning Polish, low proficiency.
 
 > **Tip:** You can write your answers directly in this README.md file below each question.
 
