@@ -25,6 +25,7 @@ export function CheckForm({ onSuccess }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [note, setNote] = useState("");
 
   useEffect(() => {
     api.getVehicles().then(setVehicles).catch(console.error);
@@ -43,17 +44,19 @@ export function CheckForm({ onSuccess }: Props) {
     setLoading(true);
 
     try {
-      // TODO: Include note in the API request
       await api.createCheck({
         vehicleId: selectedVehicle,
         odometerKm: parseFloat(odometerKm),
         items,
+        note,
       });
 
       // Reset form and display success notification
       setSelectedVehicle("");
       setOdometerKm("");
       setItems(CHECK_ITEMS.map((key) => ({ key, status: "OK" as const })));
+      setNote("");
+
       onSuccess();
     } catch (err: unknown) {
       const errorResponse = err as ErrorResponse;
@@ -106,7 +109,7 @@ export function CheckForm({ onSuccess }: Props) {
         <label htmlFor="odometer">Odometer (km) *</label>
         <input
           id="odometer"
-          type="text"
+          type="number" // changed from text to number
           value={odometerKm}
           onChange={(e) => setOdometerKm(e.target.value)}
           placeholder="Enter odometer reading"
@@ -145,8 +148,17 @@ export function CheckForm({ onSuccess }: Props) {
         </div>
       </div>
 
-      {/* TODO: Add a notes textarea field here (optional, max 300 characters) */}
-
+      <div className="form-group">
+        <label htmlFor="note">Note</label>
+        <textarea
+            id="note"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="Enter Notes"
+            maxLength={300}
+        />
+        <div style={{color: 'black'}}>{note.length}/300</div>
+      </div>
       <button type="submit" disabled={loading}>
         {loading ? "Submitting..." : "Submit Check"}
       </button>
