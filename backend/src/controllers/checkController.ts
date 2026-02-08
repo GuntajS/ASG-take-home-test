@@ -67,7 +67,6 @@ import {CreateCheckData} from "../services/checkService";
  * }
  */
 export const createCheck = (req: Request, res: Response): void => {
-  // TODO: Implement the createCheck controller
   let validation_check:ValidationError[] = validateCheckRequest(req.body)
 
   if (validation_check.length){
@@ -87,17 +86,6 @@ export const createCheck = (req: Request, res: Response): void => {
   let check_object = checkService.createCheck(check_data)
 
   res.status(201).json(check_object)
-
-
-
-  // Instructions:
-  // 1. Validate the request body using validateCheckRequest(req.body)
-  // 2. If there are validation errors, return a 400 status with ErrorResponse format
-  // 3. If validation passes, call checkService.createCheck() with the appropriate data
-  // 4. Return a 201 status with the created check
-  //
-  // Hint: Look at the getChecks controller below for reference on error handling
-  // Hint: The checkService.createCheck expects CreateCheckData interface
 
 };
 
